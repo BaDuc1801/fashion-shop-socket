@@ -1,5 +1,5 @@
 import express from "express";
-import { getIO } from "./src/socket.js";
+import { getIO } from "./socket";
 
 const router = express.Router();
 
