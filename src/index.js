@@ -1,8 +1,8 @@
 import express from "express";
 import http from "http";
 import cors from "cors";
-import routes from "./routes.js";
 import { initSocket } from "./socket.js";
+import router from "./route.js";
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(
 
 app.use(express.json());
 
-app.use("/api", routes);
+app.use("/api", router);
 
 const server = http.createServer(app);
 
