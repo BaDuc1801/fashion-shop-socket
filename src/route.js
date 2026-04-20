@@ -9,6 +9,8 @@ router.post("/emit", (req, res) => {
 
     const io = getIO();
 
+    console.log("📢 EMIT:", event, "ROOM:", room);
+
     if (room) {
       io.to(room).emit(event, data);
     } else {

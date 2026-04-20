@@ -13,11 +13,23 @@ export const initSocket = (server) => {
       ],
       credentials: true,
     },
-    transports: ["polling", "websocket"],
+    transports: ["websocket", "polling"],
   });
 
   io.on("connection", (socket) => {
-    console.log("Socket connected:", socket.id);
+    console.log("🟢 Socket connected:", socket.id);
+
+    // 🔥 JOIN MULTI ADMIN ROOM
+    socket.on("join_admin_room", (userId) => {
+      socket.join("admins");
+      socket.join(`admin_${userId}`);
+
+      console.log(`👤 Admin joined room: ${userId}`);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("🔴 Socket disconnected:", socket.id);
+    });
   });
 
   return io;
