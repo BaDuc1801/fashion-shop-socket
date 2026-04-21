@@ -19,12 +19,16 @@ export const initSocket = (server) => {
   io.on("connection", (socket) => {
     console.log("🟢 Socket connected:", socket.id);
 
-    // 🔥 JOIN MULTI ADMIN ROOM
     socket.on("join_admin_room", (userId) => {
       socket.join("admins");
       socket.join(`admin_${userId}`);
 
       console.log(`👤 Admin joined room: ${userId}`);
+    });
+
+    socket.on("join_customer_room", (userId) => {
+      socket.join(`customer_${userId}`);
+      console.log(`🛒 Customer joined room: ${userId}`);
     });
 
     socket.on("disconnect", () => {
